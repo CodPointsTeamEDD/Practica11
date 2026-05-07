@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import estructuras.listas.*;
 
 public class TablaHashEncadenadora<K, V> extends TablaHash<K, V>{
 
@@ -18,7 +19,7 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V>{
             for (int i = 0; i < entradas.length; i++){
                 if (entradas[i] != null){
                     for (Entrada entrada : entradas[i]){
-                        listini.insertar(entrada);
+                        listini.agregar(entrada);
                     }
                 }
             }
