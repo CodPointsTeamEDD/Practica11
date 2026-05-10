@@ -3,6 +3,16 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import estructuras.listas.*;
 
+/**
+ * Clase abstracta {@code TablaHashEncadenadora}
+ * Extiende de la clase {@link TablaHash}
+ *
+ * @author Luis Fernando Quintana López
+ * @author Erick Xavier Martinez Briones
+ * @version 1.0.0
+ * @since 2026
+ * 
+ */
 public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
 
     /* Clase privada para iteradores de TablaHash. */
@@ -130,6 +140,13 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         elementos = 0;
     }
 
+    /**
+     * Agrega una nueva entrada a la tabla hash. Si la llave ya existe,
+     * actualiza su valor asociado.
+     * 
+     * @param llave la llave a agregar.
+     * @param valor el valor asociado a la llave.
+     */
     @Override
     public void agregar(K llave, V valor) {
         if (llave == null || valor == null) {
@@ -159,24 +176,29 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         if (this.devolverCarga() >= MAXIMA_CARGA) {
             redimencionaArreglo();
         }
-
     }
 
+    /**
+     * Devuelve el valor asociado a una llave.
+     * 
+     * @param llave la llave cuyo valor se desea obtener.
+     * @return el valor asociado a la llave.
+     */
     @Override
     public V obtenerValorLlave(K llave) throws IllegalArgumentException {
-        if(llave == null){
+        if (llave == null) {
             throw new IllegalArgumentException("La llave no puede ser nula");
         }
 
         int i = dispersor.dispersa(llave) & (entradas.length - 1);
 
-        if(this.entradas[i] == null){
+        if (this.entradas[i] == null) {
             throw new IllegalArgumentException("No puede ser nula la entrada");
         }
 
-        for(Entrada e : entradas[i]){
-            
-            if(e.llave.equals(llave)){
+        for (Entrada e : entradas[i]) {
+
+            if (e.llave.equals(llave)) {
                 return e.valor;
             }
         }
@@ -184,6 +206,12 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         throw new IllegalArgumentException("No existe la llave");
     }
 
+    /**
+     * Verifica si una llave existe en la tabla hash.
+     * 
+     * @param llave la llave a buscar.
+     * @return verdadero si la llave existe, falso en otro caso.
+     */
     @Override
     public boolean buscar(K llave) {
         if (llave == null) {
@@ -205,6 +233,11 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         return false;
     }
 
+    /**
+     * Elimina la entrada asociada a una llave.
+     * 
+     * @param llave la llave de la entrada a eliminar.
+     */
     @Override
     public void eliminar(K llave) {
         if (llave == null || !this.buscar(llave)) {
@@ -222,24 +255,48 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         this.elementos--;
     }
 
+    /**
+     * Devuelve el número de elementos en la tabla hash.
+     * 
+     * @return la cantidad de elementos almacenados.
+     */
     public int devolverElementos() {
         return this.elementos;
     }
 
+    /**
+     * Devuelve un iterador para las llaves de la tabla hash.
+     * 
+     * @return un iterador de llaves.
+     */
     public Iterator<K> iteradorLlaves() {
         return new IteradorLlaves();
     }
 
+    /**
+     * Devuelve un iterador para los valores de la tabla hash.
+     * 
+     * @return un iterador de valores.
+     */
     @Override
     public Iterator<V> iterator() {
         return new IteradorValores();
     }
 
+    /**
+     * Devuelve la carga actual de la tabla hash.
+     * 
+     * @return la carga de la tabla.
+     */
     @Override
     public double devolverCarga() {
         return (this.elementos) / (this.entradas.length);
     }
 
+    /**
+     * Redimensiona el arreglo interno de la tabla hash y reinserta
+     * sus elementos en el nuevo arreglo.
+     */
     @Override
     protected void redimencionaArreglo() {
         int tamanio = calcularNuevoTamanio(this.entradas.length);
@@ -258,6 +315,11 @@ public class TablaHashEncadenadora<K, V> extends TablaHash<K, V> {
         }
     }
 
+    /**
+     * Devuelve una representación en cadena de la tabla hash.
+     * 
+     * @return una cadena con el contenido de la tabla.
+     */
     @Override
     public String toString() {
         String cadena = "";
