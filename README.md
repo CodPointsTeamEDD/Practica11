@@ -25,8 +25,8 @@ Luis Fernando Quintana López
         - Conjuntos
         - ListaDoble
         - ListaSimple
-        - OrdsCuadraticos
+        - Ordenamientos
         - Ordenamientos2
         - PiCola
-        - Hash
+        - TablasHash
 (Ejecutar en pantalla completa de la terminal)
